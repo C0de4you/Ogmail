@@ -1,0 +1,338 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.mainTheme {
+  background-color: blue;
+}
+
+.helpTheme {
+  background-color: lightskyblue;
+}
+
+.container {
+  display: flex;
+  justify-content: space-around;
+  position: absolute;
+  top: 70px;
+  bottom: 50px;
+  left: 0;
+  right: 0;
+}
+
+.header {
+  position: absolute;
+  width: 100%;
+  height: 70px;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.header__logout {
+  padding: 5px;
+  float: right;
+  margin-right: 20px;
+  margin-top: 10px;
+  text-align: center;
+  font-size: 16px;
+  box-shadow: 3px 3px black;
+}
+
+.header__writeMessage {
+  float: right;
+  padding: 5px;
+  box-sizing: border-box;
+  margin-right: 20px;
+  margin-top: 10px;
+  text-align: center;
+  font-size: 16px;
+  box-shadow: 3px 3px black;
+}
+
+.header__writeMessage:hover,
+.header__logout:hover,
+.writeMessage-modal-form__close:hover,
+.writeMessage-modal-form__send:hover,
+.letter-page__close:hover,
+.letter-page__delete:hover,
+.login-form__button:hover {
+  background-color: gray;
+  cursor: pointer;
+}
+
+.header__writeMessage:active,
+.header__logout:active,
+.writeMessage-modal-form__close:active,
+.writeMessage-modal-form__send:active,
+.letter-page__close:active,
+.letter-page__delete:active,
+.login-form__button:active {
+  box-shadow: none;
+}
+
+.header-sortMessage {
+  display: flex;
+  float: right;
+  padding: 5px;
+  box-sizing: border-box;
+  margin-right: 20px;
+  margin-top: 10px;
+  font-size: 16px;
+  outline: none;
+  border: none;
+}
+
+.header-sortMessage__selector {
+  border: none;
+  outline: none;
+}
+
+.header__logo {
+  font-size: 40px;
+  width: 20%;
+  display: inline-block;
+  text-align: center;
+  color: white;
+}
+
+.sideBar {
+  width: 20%;
+  padding: 15px;
+  box-sizing: border-box;
+}
+
+.sideBar-categories {
+  list-style-type: none;
+  font-size: 20px;
+  line-height: 30px;
+  border-bottom: 1px solid black;
+  padding-bottom: 8px;
+}
+
+.sideBar-categories__category {
+  color: black;
+  text-decoration: none;
+}
+
+.sideBar-categories__category:hover {
+  color: white;
+  cursor: pointer;
+}
+
+.mailList {
+  width: 78%;
+  padding: 10px 15px;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+.footer {
+  width: 100%;
+  height: 50px;
+  padding: 15px;
+  box-sizing: border-box;
+  position: absolute;
+  bottom: 0;
+  font-size: 20px;
+  color: white;
+}
+
+.letter {
+  width: 100%;
+  height: 100px;
+  background-color: white;
+  border-radius: 10px;
+  padding: 15px;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+}
+
+.letter__from {
+  width: 50%;
+  font-size: 20px;
+  float: left;
+  box-sizing: border-box;
+}
+
+.letter__date {
+  width: 50%;
+  font-size: 20px;
+  float: right;
+  text-align: right;
+  box-sizing: border-box;
+}
+
+.letter__theme {
+  clear: both;
+  font-size: 18px;
+  box-sizing: border-box;
+  margin-top: 5px;
+}
+
+.letter__message {
+  font-size: 16px;
+  box-sizing: border-box;
+  margin-top: 5px;
+  height: 20px;
+  overflow: hidden;
+  word-wrap: break-word;
+}
+
+.letter__message__full {
+  height: 90%;
+  line-height: 20px;
+  word-wrap: break-word;
+}
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 800px;
+  height: 500px;
+  margin-left: -400px;
+  margin-top: -250px;
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.writeMessage-modal-form {
+  display: flex;
+  flex-direction: column;
+  font-size: 20px;
+}
+
+.writeMessage-modal-form__textarea {
+  width: 100%;
+  height: 250px;
+  resize: none;
+  font-size: 16px;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.modalBackground {
+  background-color: black;
+  opacity: 0.5;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.writeMessage-modal-form__senderInput,
+.writeMessage-modal-form__themeInput {
+  height: 30px;
+  font-size: 16px;
+  padding: 4px;
+  box-sizing: border-box;
+}
+
+.writeMessage-modal__header {
+  font-size: 30px;
+  text-align: center;
+}
+
+.writeMessage-modal-form__close {
+  float: left;
+  padding: 5px;
+  box-sizing: border-box;
+  margin-top: 10px;
+  text-align: center;
+  font-size: 16px;
+  box-shadow: 3px 3px black;
+  width: 100px;
+}
+
+.writeMessage-modal-form__send {
+  float: right;
+  padding: 5px;
+  box-sizing: border-box;
+  margin-top: 10px;
+  text-align: center;
+  font-size: 16px;
+  box-shadow: 3px 3px black;
+  width: 100px;
+}
+
+.letterLink {
+  text-decoration: none;
+  color: black;
+}
+
+.letterLink:hover .letter {
+  transform: scale(1.01);
+  background-color: whitesmoke;
+}
+
+.letter-page {
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  border-radius: 10px;
+  padding: 15px;
+  box-sizing: border-box;
+}
+
+.letter-page__close {
+  float: left;
+  padding: 5px;
+  box-sizing: border-box;
+  text-align: center;
+  font-size: 16px;
+  box-shadow: 3px 3px black;
+}
+
+.letter-page__delete {
+  float: right;
+  padding: 5px;
+  box-sizing: border-box;
+  text-align: center;
+  font-size: 16px;
+  box-shadow: 3px 3px black;
+}
+
+.login {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}
+
+.login-form {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 500px;
+  height: 250px;
+  margin-left: -250px;
+  margin-top: -125px;
+  background-color: white;
+  border-radius: 10px;
+  box-sizing: border-box;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  font-size: 20px;
+}
+
+.login-form__button {
+  text-align: center;
+  font-size: 16px;
+  box-shadow: 3px 3px black;
+  margin-top: 20px;
+}
+
+.login-form__header {
+  text-align: center;
+}
+
+.login-form__input {
+  padding: 5px;
+  font-size: 16px;
+}
