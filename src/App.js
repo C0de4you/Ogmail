@@ -9,10 +9,12 @@ import {
 
 function App() {
   return (
+    <React.Suspense fallback={<div>Loading...</div>}>
     <Routes>
       <Route path="/" element={<LoginPage />} />
       <Route path="message/*" element={<Messages />} />
     </Routes>
+    </React.Suspense>
   )
 }
 
