@@ -19,4 +19,4 @@ const Modal = (props) => {
         document.body)
 }
 
-export default Modal;
+export default Modal;// Попа
