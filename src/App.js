@@ -1,6 +1,6 @@
 import React from "react";
-import Messages from "./Messages";
-import LoginPage from "./LoginPage";
+import Messages from "./MessagesSection/MessagesSection";
+import LoginSection from "./LoginSection";
 import {
   Routes,
   Route,
@@ -9,12 +9,10 @@ import {
 
 function App() {
   return (
-    <React.Suspense fallback={<div>Loading...</div>}>
     <Routes>
-      <Route path="/" element={<LoginPage />} />
-      <Route path="message/*" element={<Messages />} />
+      <Route path="/" element={<LoginSection />} />
+      <Route path="/messages/*" element={<Messages />} />
     </Routes>
-    </React.Suspense>
   )
 }
 

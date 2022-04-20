@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate, Outlet } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function LoginPage() {
 
@@ -10,7 +10,7 @@ function LoginPage() {
 
     const loginHandler = () => {
         if (loginInputValue === 'admin' && passwordInputValue === 'admin') {
-            navigate('/message/inBox')
+            navigate('/messages/inBox')
         } else {
             alert('Неверный логин или пароль!')
         }
@@ -26,7 +26,6 @@ function LoginPage() {
                 <input className="login-form__input" type="text" value={passwordInputValue} onChange={(event) => {setPasswordInputValue(event.target.value)}}></input>
                 <button onClick={loginHandler} className="login-form__button">Войти</button>
             </form>
-            <Outlet />
         </div>
     )
 }

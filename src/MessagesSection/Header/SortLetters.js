@@ -1,16 +1,25 @@
 import React, { useState } from "react";
-import { HeaderContext } from "./Messages";
+import { Context } from "../MessagesSection";
 
 function SortLetters() {
 
-    const headerData = React.useContext(HeaderContext);
+    const contextValue = React.useContext(Context);
+    const dataBase = contextValue.dataBase;
 
-    const sortLetters = headerData.sortLetters;
     const [selectValue, setSelectValue] = useState('date');
 
+    const sortFunc = ((value, previous, current) => {
+        if (previous[value] > current[value]) return 1;
+        else return -1;
+    })
+
     const selectHandler = (event) => {
-        setSelectValue(event.target.value);
-        sortLetters(event.target.value);
+        const value = event.target.value;
+        setSelectValue(value);
+        dataBase.inBox.sort(sortFunc.bind(null, value));
+        dataBase.outBox.sort(sortFunc.bind(null, value));
+        dataBase.delBox.sort(sortFunc.bind(null, value));
+        contextValue.setState([]);
     }
 
     return (
