@@ -11,7 +11,7 @@
   background-color: lightskyblue;
 }
 
-.container {
+.mailbox__container {
   display: flex;
   justify-content: space-around;
   position: absolute;
@@ -39,7 +39,7 @@
   box-shadow: 3px 3px black;
 }
 
-.header__writeMessage {
+.header__writeLetter {
   float: right;
   padding: 5px;
   box-sizing: border-box;
@@ -50,10 +50,10 @@
   box-shadow: 3px 3px black;
 }
 
-.header__writeMessage:hover,
+.header__writeLetter:hover,
 .header__logout:hover,
-.writeMessage-modal-form__close:hover,
-.writeMessage-modal-form__send:hover,
+.writeLetter-modal-form__close:hover,
+.writeLetter-modal-form__send:hover,
 .letter-page__close:hover,
 .letter-page__delete:hover,
 .login-form__button:hover {
@@ -61,17 +61,17 @@
   cursor: pointer;
 }
 
-.header__writeMessage:active,
+.header__writeLetter:active,
 .header__logout:active,
-.writeMessage-modal-form__close:active,
-.writeMessage-modal-form__send:active,
+.writeLetter-modal-form__close:active,
+.writeLetter-modal-form__send:active,
 .letter-page__close:active,
 .letter-page__delete:active,
 .login-form__button:active {
   box-shadow: none;
 }
 
-.header-sortMessage {
+.header-sortLetters {
   display: flex;
   float: right;
   padding: 5px;
@@ -83,7 +83,7 @@
   border: none;
 }
 
-.header-sortMessage__selector {
+.header-sortLetters__selector {
   border: none;
   outline: none;
 }
@@ -120,7 +120,7 @@
   cursor: pointer;
 }
 
-.mailList {
+.mailBox {
   width: 78%;
   padding: 10px 15px;
   box-sizing: border-box;
@@ -208,13 +208,13 @@
   box-sizing: border-box;
 }
 
-.writeMessage-modal-form {
+.writeLetter-modal-form {
   display: flex;
   flex-direction: column;
   font-size: 20px;
 }
 
-.writeMessage-modal-form__textarea {
+.writeLetter-modal-form__textarea {
   width: 100%;
   height: 250px;
   resize: none;
@@ -232,20 +232,20 @@
   box-sizing: border-box;
 }
 
-.writeMessage-modal-form__senderInput,
-.writeMessage-modal-form__themeInput {
+.writeLetter-modal-form__senderInput,
+.writeLetter-modal-form__themeInput {
   height: 30px;
   font-size: 16px;
   padding: 4px;
   box-sizing: border-box;
 }
 
-.writeMessage-modal__header {
+.writeLetter-modal__header {
   font-size: 30px;
   text-align: center;
 }
 
-.writeMessage-modal-form__close {
+.writeLetter-modal-form__close {
   float: left;
   padding: 5px;
   box-sizing: border-box;
@@ -256,7 +256,7 @@
   width: 100px;
 }
 
-.writeMessage-modal-form__send {
+.writeLetter-modal-form__send {
   float: right;
   padding: 5px;
   box-sizing: border-box;
@@ -270,6 +270,15 @@
 .letterLink {
   text-decoration: none;
   color: black;
+}
+
+.letter_ul {
+  width: 100%;
+  height: 100%;
+}
+
+.letter__li {
+  list-style-type: none;
 }
 
 .letterLink:hover .letter {
@@ -363,7 +372,20 @@
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }
+}
+
+.emptyMailBox {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.emptyMailBox__text {
+  text-align:center;
+  font-size: 30px;
 }
