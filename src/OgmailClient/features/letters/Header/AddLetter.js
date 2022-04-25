@@ -1,12 +1,11 @@
 import React from "react";
 import { useDispatch, useSelector } from 'react-redux'
-import { selectNextId, fetchNewLetter } from '../lettersSlice'
+import { fetchNewLetter } from '../lettersSlice'
 
 function AddLetter(props) {
 
     const setIsOpen = props.setIsOpen;
     const dispatch = useDispatch();
-    const id = useSelector(selectNextId)
 
     const [senderInputValue, setSenderInputValue] = React.useState('');
     const [themeInputValue, setThemeInputValue] = React.useState('');
@@ -29,7 +28,6 @@ function AddLetter(props) {
                     message: messageInputValue,
                     status: 'read',
                     box: 'outBox',
-                    id
                 }
                 ))
             } catch (err) {

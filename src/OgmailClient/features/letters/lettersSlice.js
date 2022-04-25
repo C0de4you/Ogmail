@@ -123,8 +123,6 @@ const lettersSelectors = lettersAdapter.getSelectors((state) => state.letters);
 
 export const selectLetterById = lettersSelectors.selectById;
 
-export const selectNextId = lettersSelectors.selectTotal;
-
 export const selectLettersByBox = (state, box) => lettersSelectors.selectAll(state)
     .filter(letter => letter.box === box)
     .sort(sortFunc.bind(null, state.letters.sortBy));
