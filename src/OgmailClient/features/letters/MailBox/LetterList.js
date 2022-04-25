@@ -3,7 +3,7 @@ import Letter from "./LetterListElement";
 import { useParams } from "react-router-dom";
 import { useSelector } from 'react-redux'
 import { Link } from "react-router-dom";
-import { selectLettersByBox} from "../lettersSlice"
+import { selectLettersByBox } from "../lettersSlice"
 
 function LetterList() {
 

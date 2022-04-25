@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux'
-import { deleteLetter, readLetter, selectLetterById } from '../lettersSlice'
+import { selectLetterById, fetchDelLetter, fetchUpdateLetter } from '../lettersSlice'
 
 function LetterPage() {
 
@@ -12,13 +12,53 @@ function LetterPage() {
     const dispatch = useDispatch();
     const letter = useSelector((state) => selectLetterById(state, id));
 
-    const closeButtonHandler = () => {
-        dispatch(readLetter({ id }))
-        navigate(`/letters/${selectedBox}`);
+    const [addRequestStatus, setAddRequestStatus] = React.useState('idle');
+
+    const closeButtonHandler = async () => {
+        if (addRequestStatus === 'idle') {
+            try {
+                setAddRequestStatus('pending')
+                await dispatch(fetchUpdateLetter({ id, property: 'status', value: 'read' }))
+            } catch (err) {
+                console.error('Failed to update the letter: ', err)
+            } finally {
+                navigate(`/letters/${selectedBox}`);
+            }
+        }
+    }
+
+    const deleteLetterFromDelBox = async () => {
+        if (addRequestStatus === 'idle') {
+            try {
+                setAddRequestStatus('pending')
+                await dispatch(fetchDelLetter({ id }))
+            } catch (err) {
+                console.error('Failed to delete the letter: ', err)
+            } finally {
+                setAddRequestStatus('idle')
+            }
+        }
+    }
+
+    const moveLetterToDelBox = async () => {
+        if (addRequestStatus === 'idle') {
+            try {
+                setAddRequestStatus('pending')
+                await dispatch(fetchUpdateLetter({ id, property: 'box', value: 'delBox' }))
+            } catch (err) {
+                console.error('Failed to update the letter: ', err)
+            } finally {
+                setAddRequestStatus('idle')
+            }
+        }
     }
 
     const deleteButtonHandler = () => {
-        dispatch(deleteLetter({ box: selectedBox, id }))
+        if (selectedBox === 'delBox') {
+            deleteLetterFromDelBox();
+        } else {
+            moveLetterToDelBox();
+        }
         navigate(`/letters/${selectedBox}`);
     }
 
