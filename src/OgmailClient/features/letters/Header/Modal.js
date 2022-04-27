@@ -4,7 +4,6 @@ import ReactDOM from 'react-dom';
 const Modal = (props) => {
 
     const isOpen = props.isOpen;
-    const Child = props.child;
 
     if (!isOpen) return null
     return ReactDOM.createPortal(
@@ -12,7 +11,7 @@ const Modal = (props) => {
             <div className="modalBackground">
             </div>
             <div className="modal">
-                {Child}
+                {props.children}
             </div>
         </React.Fragment>,
         document.body)

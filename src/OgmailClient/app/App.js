@@ -11,7 +11,7 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<LoginSection />} />
-      <Route path="/letters/*" element={<LettersSection />} />
+      <Route path="/mailbox/*" element={<LettersSection />} />
     </Routes>
   )
 }

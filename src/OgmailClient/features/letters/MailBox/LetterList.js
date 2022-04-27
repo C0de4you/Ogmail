@@ -17,13 +17,13 @@ function LetterList() {
     if (letters.length) {
         renderedLetters = letters.map(letter => (
             <li className="letter__li" key={letter.id}>
-                <Link className="letterLink" to={`/letters/id${letter.id}`}>
+                <Link className="letterLink" to={`/mailbox/letter/${letter.id}`}>
                     <Letter letter={letter} />
                 </Link>
             </li>
         ))
     } else {
-        renderedLetters = <div className="emptyMailBox"><p className="emptyMailBox__text">Пусто</p></div>
+        renderedLetters = <li className="emptyMailBox"><p className="emptyMailBox__text">Пусто</p></li>
     }
 
     return (

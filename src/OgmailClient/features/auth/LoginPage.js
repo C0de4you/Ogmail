@@ -10,7 +10,7 @@ function LoginPage() {
 
     const loginHandler = () => {
         if (loginInputValue === 'admin' && passwordInputValue === 'admin') {
-            navigate('/letters/inBox')
+            navigate('/mailbox/inBox')
         } else {
             alert('Неверный логин или пароль!')
         }

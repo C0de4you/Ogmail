@@ -1,7 +1,8 @@
 import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux'
-import { selectLetterById, fetchDelLetter, fetchUpdateLetter } from '../lettersSlice'
+import { selectLetterById } from '../lettersSlice'
+import { LETTER } from "../../../app/constants";
 
 function LetterPage() {
 
@@ -14,24 +15,24 @@ function LetterPage() {
 
     const [addRequestStatus, setAddRequestStatus] = React.useState('idle');
 
-    const closeButtonHandler = async () => {
+    const closeButtonHandler = () => {
         if (addRequestStatus === 'idle') {
             try {
                 setAddRequestStatus('pending')
-                await dispatch(fetchUpdateLetter({ id, property: 'status', value: 'read' }))
+                dispatch({ type: LETTER.PATCH, payload: { id, property: 'status', value: 'read' }})
             } catch (err) {
                 console.error('Failed to update the letter: ', err)
             } finally {
-                navigate(`/letters/${selectedBox}`);
+                setAddRequestStatus('idle')
+                navigate(`/mailbox/${selectedBox}`);
             }
         }
     }
 
-    const deleteLetterFromDelBox = async () => {
+    const deleteLetterFromDelBox = () => {
         if (addRequestStatus === 'idle') {
             try {
-                setAddRequestStatus('pending')
-                await dispatch(fetchDelLetter({ id }))
+                dispatch({ type: LETTER.DELETE, payload: {id} });
             } catch (err) {
                 console.error('Failed to delete the letter: ', err)
             } finally {
@@ -40,11 +41,11 @@ function LetterPage() {
         }
     }
 
-    const moveLetterToDelBox = async () => {
+    const moveLetterToDelBox = () => {
         if (addRequestStatus === 'idle') {
             try {
                 setAddRequestStatus('pending')
-                await dispatch(fetchUpdateLetter({ id, property: 'box', value: 'delBox' }))
+                dispatch({ type: LETTER.PATCH, payload: { id, property: 'box', value: 'delBox' }})
             } catch (err) {
                 console.error('Failed to update the letter: ', err)
             } finally {
@@ -59,7 +60,7 @@ function LetterPage() {
         } else {
             moveLetterToDelBox();
         }
-        navigate(`/letters/${selectedBox}`);
+        navigate(`/mailbox/${selectedBox}`);
     }
 
     return (

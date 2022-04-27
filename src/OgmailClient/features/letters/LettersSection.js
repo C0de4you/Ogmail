@@ -8,9 +8,7 @@ function LettersSection() {
     return (
         <React.Fragment>
             <Header />
-            <div className="mailbox__container mainTheme">
-                <MailBox />
-            </div>
+            <MailBox />
             <Footer />
         </React.Fragment>
     )

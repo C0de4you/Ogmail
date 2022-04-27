@@ -1,20 +1,21 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Routes, Route } from "react-router-dom";
 import LetterPage from "./LetterPage";
 import SideBar from "./SideBar";
 import Loading from "./Loading";
 import LetterList from "./LetterList"
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchLetters } from '../lettersSlice'
+import { selectStatus } from '../lettersSlice'
+import { LETTER } from "../../../app/constants";
 
 function MailBox() {
 
-    const status = useSelector(state => state.letters.status);
+    const status = useSelector(selectStatus);
     const dispatch = useDispatch();
 
-    useEffect(() => {
+    React.useEffect(() => {
         if (status === 'idle') {
-            dispatch(fetchLetters())
+            dispatch({ type: LETTER.GET })
         }
     }, [status, dispatch])
 
@@ -26,17 +27,19 @@ function MailBox() {
         content =
             <Routes>
                 <Route path=":Box" element={<LetterList />} />
-                <Route path="id:id" element={<LetterPage />} />
+                <Route path="letter/:id" element={<LetterPage />} />
             </Routes>
+    } else {
+        content = <div className="emptyMailBox"><p className="emptyMailBox__text">Сервер не отвечает :(</p></div>
     }
 
     return (
-        <React.Fragment>
+        <div className="mailbox__container mainTheme">
             <SideBar />
             <div className='mailBox helpTheme'>
                 {content}
             </div>
-        </React.Fragment>
+        </div>
     )
 }
 

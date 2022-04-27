@@ -1,0 +1,6 @@
+export const LETTER = {
+    GET: 'LETTER_GET',
+    POST: 'LETTER_POST',
+    PATCH: 'LETTER_PATCH',
+    DELETE: 'LETTER_DELETE',
+}

@@ -10,7 +10,9 @@ function AddLetterButton() {
     return (
         <React.Fragment>
             <div className="header__writeLetter helpTheme" onClick={() => { setIsOpen(true) }}>Написать письмо</div>
-            <Modal isOpen={isOpen} setIsOpen={setIsOpen} child={<AddLetter  setIsOpen={setIsOpen}/>} />
+            <Modal isOpen={isOpen} setIsOpen={setIsOpen} >
+                <AddLetter setIsOpen={setIsOpen} />
+            </Modal>
         </React.Fragment>
     )
 }
