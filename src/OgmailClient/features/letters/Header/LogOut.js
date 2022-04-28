@@ -1,12 +1,19 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { setLoginHint, setUser } from '../../auth/authSlice';
+import { useDispatch } from 'react-redux'
 
 function LogOut() {
 
-    let navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    const logOut = () => {
+        localStorage.clear()
+        dispatch(setLoginHint(''));
+        dispatch(setUser(null));
+    }
 
     return (
-        <div onClick={() => navigate("/")} className="header__logout helpTheme">Выйти</div>
+        <div onClick={logOut} className="header__logout helpTheme">Выйти</div>
     )
 }
 

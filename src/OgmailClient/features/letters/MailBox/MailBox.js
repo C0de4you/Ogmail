@@ -5,8 +5,7 @@ import SideBar from "./SideBar";
 import Loading from "./Loading";
 import LetterList from "./LetterList"
 import { useDispatch, useSelector } from 'react-redux'
-import { selectStatus } from '../lettersSlice'
-import { LETTER } from "../../../app/constants";
+import { getLettersAction, selectStatus } from '../lettersSlice'
 
 function MailBox() {
 
@@ -15,7 +14,7 @@ function MailBox() {
 
     React.useEffect(() => {
         if (status === 'idle') {
-            dispatch({ type: LETTER.GET })
+            dispatch(getLettersAction());
         }
     }, [status, dispatch])
 

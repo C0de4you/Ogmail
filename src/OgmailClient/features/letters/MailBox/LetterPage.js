@@ -1,8 +1,7 @@
 import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux'
-import { selectLetterById } from '../lettersSlice'
-import { LETTER } from "../../../app/constants";
+import { deleteLetterAction, patchLetterAction, selectLetterById } from '../lettersSlice'
 
 function LetterPage() {
 
@@ -19,7 +18,7 @@ function LetterPage() {
         if (addRequestStatus === 'idle') {
             try {
                 setAddRequestStatus('pending')
-                dispatch({ type: LETTER.PATCH, payload: { id, property: 'status', value: 'read' }})
+                dispatch(patchLetterAction(id, 'status', 'read'))
             } catch (err) {
                 console.error('Failed to update the letter: ', err)
             } finally {
@@ -32,7 +31,7 @@ function LetterPage() {
     const deleteLetterFromDelBox = () => {
         if (addRequestStatus === 'idle') {
             try {
-                dispatch({ type: LETTER.DELETE, payload: {id} });
+                dispatch(deleteLetterAction(id));
             } catch (err) {
                 console.error('Failed to delete the letter: ', err)
             } finally {
@@ -45,7 +44,7 @@ function LetterPage() {
         if (addRequestStatus === 'idle') {
             try {
                 setAddRequestStatus('pending')
-                dispatch({ type: LETTER.PATCH, payload: { id, property: 'box', value: 'delBox' }})
+                dispatch(patchLetterAction(id, 'box', 'delBox'))
             } catch (err) {
                 console.error('Failed to update the letter: ', err)
             } finally {

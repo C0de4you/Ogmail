@@ -350,6 +350,11 @@
   text-align: center;
 }
 
+.login-form__loginHint {
+  float: right;
+  color: red;
+}
+
 .login-form__input {
   padding: 5px;
   font-size: 16px;

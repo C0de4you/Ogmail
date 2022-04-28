@@ -1,8 +1,9 @@
 import {
     createSlice,
-    createAsyncThunk,
+    createAction,
     createEntityAdapter,
 } from '@reduxjs/toolkit';
+import { LETTER } from '../../app/constants';
 
 const sortFunc = ((value, previous, current) => {
     if (previous[value] > current[value]) return 1;
@@ -16,22 +17,6 @@ const initialState = lettersAdapter.getInitialState({
     sortBy: 'date'
 })
 
-const url = "http://localhost:3001/"
-
-export const fetchUpdateLetter = createAsyncThunk('letters/fetchUpdateLetter',
-    async data => {
-        const response = await fetch(url, {
-            method: 'PATCH',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            mode: 'cors',
-            body: JSON.stringify(data)
-        })
-        return await response.json();
-    }
-)
-
 export const lettersSlice = createSlice({
     name: 'letters',
     initialState,
@@ -44,6 +29,27 @@ export const lettersSlice = createSlice({
         updateLetter: lettersAdapter.updateOne,
     },
 })
+
+export const getLettersAction = createAction(LETTER.GET);
+export const postLettersAction = createAction(LETTER.POST, (sender, theme, message) => {
+    return {
+        payload: {
+            date: (new Date()).toLocaleString(),
+            sender,
+            theme,
+            message,
+            status: 'read',
+            box: 'outBox',
+        }
+    }
+});
+
+export const patchLetterAction = createAction(LETTER.PATCH, (id, property, value) => {
+    return { payload: { id, property, value } }
+});
+export const deleteLetterAction = createAction(LETTER.DELETE, (id) => {
+    return { payload: { id } }
+});
 
 const lettersSelectors = lettersAdapter.getSelectors((state) => state.letters);
 

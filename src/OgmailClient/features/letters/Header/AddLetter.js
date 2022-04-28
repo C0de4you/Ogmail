@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from 'react-redux'
-import { LETTER } from "../../../app/constants";
+import { postLettersAction } from "../lettersSlice";
 
 function AddLetter(props) {
 
@@ -17,20 +17,13 @@ function AddLetter(props) {
         [senderInputValue, themeInputValue, messageInputValue].every(Boolean) && addRequestStatus === 'idle'
 
     const sendHandler = async () => {
+        const sender = senderInputValue;
+        const theme = themeInputValue;
+        const message = messageInputValue;
         if (canSave) {
             try {
                 setAddRequestStatus('pending')
-                dispatch({
-                    type: LETTER.POST, payload:
-                    {
-                        date: (new Date()).toLocaleString(),
-                        sender: senderInputValue,
-                        theme: themeInputValue,
-                        message: messageInputValue,
-                        status: 'read',
-                        box: 'outBox',
-                    }
-                })
+                dispatch(postLettersAction(sender, theme, message));
             } catch (err) {
                 console.error('Failed to add the letter: ', err);
             } finally {

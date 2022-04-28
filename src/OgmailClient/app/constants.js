@@ -1,6 +1,10 @@
 export const LETTER = {
-    GET: 'LETTER_GET',
-    POST: 'LETTER_POST',
-    PATCH: 'LETTER_PATCH',
-    DELETE: 'LETTER_DELETE',
+    GET: 'letters/getLetters',
+    POST: 'letters/postLetter',
+    PATCH: 'letters/patchLetter',
+    DELETE: 'letters/deleteLetter',
+}
+
+export const AUTH = {
+    LOGIN: 'auth/login'
 }
