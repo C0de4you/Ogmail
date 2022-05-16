@@ -9,7 +9,7 @@ function LetterPage() {
     const navigate = useNavigate();
     const params = useParams();
     const id = Number(params.id);
-    const selectedBox = localStorage.selectedBox;
+    const selectedBox = localStorage.selectedBox ?? 'inBox';
     const dispatch = useDispatch();
     const letter = useSelector((state) => selectLetterById(state, id));
 

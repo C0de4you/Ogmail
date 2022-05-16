@@ -3,16 +3,70 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setLogin } from "../actions";
 import { userSelector, loginHintSelector } from '../selectors'
+import { Field, reduxForm } from 'redux-form'
+
+const validate = values => {
+    const errors = {}
+    if (!values.login) {
+        errors.login = '(admin)'
+    }
+    if (!values.password) {
+        errors.password = '(admin)'
+    }
+    return errors
+}
+
+const renderInput = ({
+    input,
+    label,
+    type,
+    meta: { touched, error },
+    className
+}) => (
+    <div>
+        <label>{`${label} `}</label>
+        {touched &&
+            ((error && <span>{error}</span>))}
+        <div>
+            <input {...input} placeholder={label} type={type} className={className} />
+        </div>
+    </div>
+)
+
+const LoginForm = (props) => {
+
+    const loginHint = useSelector(loginHintSelector);
+    const mainHintElem = <p className="login-form__header">Введите логин и пароль</p>
+    const loginHintElem = <p className="login-form__loginHint">{loginHint}</p>
+    const header = loginHint ? loginHintElem : mainHintElem
+
+    return (
+        <form className="login-form">
+            {header}
+            <Field 
+            component={renderInput}
+            name='login'
+            className="login-form__input" 
+            type="email"
+            label='Логин' />
+            <Field
+            component={renderInput}
+            name="password"
+            className="login-form__input" 
+            type="password" 
+            label='Пароль' />
+            <button onClick={props.handleSubmit} className="login-form__button">Войти</button>
+        </form>
+    )
+}
+
+const LoginReduxForm = reduxForm({ form: 'loginForm', validate })(LoginForm)
 
 function LoginPage() {
 
     const navigate = useNavigate()
     const dispatch = useDispatch();
     const user = useSelector(userSelector);
-    const loginHint = useSelector(loginHintSelector);
-
-    const [loginInputValue, setLoginInputValue] = React.useState('');
-    const [passwordInputValue, setPasswordInputValue] = React.useState('');
 
     React.useEffect(() => {
         if (user) {
@@ -21,25 +75,16 @@ function LoginPage() {
         }
     }, [user, navigate])
 
-    const loginHandler = (event) => {
-        const login = loginInputValue;
-        const password = passwordInputValue;
-        event.preventDefault();
+    const handlLogin = async values => {
+       
+        const { login, password } = values
+
         dispatch(setLogin(login, password))
-        setLoginInputValue('');
-        setPasswordInputValue('');
     }
 
     return (
         <div className="login mainTheme">
-            <form className="login-form">
-                <p className="login-form__header">Введите логин и пароль</p>
-                <label>Логин (admin) <p className="login-form__loginHint">{loginHint}</p></label>
-                <input className="login-form__input" type="text" value={loginInputValue} onChange={(event) => { setLoginInputValue(event.target.value) }}></input>
-                <label>Пароль (admin)</label>
-                <input className="login-form__input" type="text" value={passwordInputValue} onChange={(event) => { setPasswordInputValue(event.target.value) }}></input>
-                <button onClick={loginHandler} className="login-form__button">Войти</button>
-            </form>
+            <LoginReduxForm onSubmit={handlLogin} />
         </div>
     )
 }

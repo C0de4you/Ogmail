@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Modal from "./Modal";
-import NewLetter from "./NewLetter";
+import NewLetterPopUp from "./NewLetterPopUp";
 
 
 function NewLetterButton() {
@@ -11,7 +11,7 @@ function NewLetterButton() {
         <React.Fragment>
             <div className="header__writeLetter helpTheme" onClick={() => { setIsOpen(true) }}>Написать письмо</div>
             <Modal isOpen={isOpen} setIsOpen={setIsOpen} >
-                <NewLetter setIsOpen={setIsOpen} />
+                <NewLetterPopUp setIsOpen={setIsOpen} />
             </Modal>
         </React.Fragment>
     )
