@@ -1,6 +1,6 @@
 require('dotenv').config();
 
-const serve = require('./server');
+const serve = require('./server/server');
 const { exec } = require('child_process');
 
 const build = () => {

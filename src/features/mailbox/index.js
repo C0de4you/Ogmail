@@ -6,6 +6,7 @@ import LetterList from "./components/LetterList";
 import { updateLetter, removeLetter } from "./actions";
 import { LETTER } from "./types";
 import { selectLetterById } from "./selectors";
+import { AUTH } from '../auth/index'
 
 export {
     mailBoxSaga,
@@ -16,6 +17,7 @@ export {
     removeLetter,
     LETTER,
     selectLetterById,
+    AUTH
 }
 
 export default mailboxReducer;

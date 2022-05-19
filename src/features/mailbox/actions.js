@@ -1,20 +1,22 @@
-import { createAction } from "@reduxjs/toolkit";
+import { createAction, nanoid } from "@reduxjs/toolkit";
 import { LETTER } from "./types";
 import { lettersSlice } from "./reducers";
+import { AUTH } from "../auth/index";
 
 const { sortLetters, setLetters, setStatus, addLetter, removeLetter, updateLetter } = lettersSlice.actions;
 
 const getLettersFromServer = createAction(LETTER.GET);
 
-const postLetterOnServer = createAction(LETTER.POST, (sender, theme, message) => {
+const postLetterOnServer = createAction(LETTER.POST, (sender, subject, message) => {
     return {
         payload: {
             date: (new Date()).toLocaleString(),
             sender,
-            theme,
+            subject,
             message,
             status: 'read',
             box: 'outBox',
+            id: nanoid(10).toString()
         }
     }
 });
@@ -27,6 +29,8 @@ const deleteLetterOnServer = createAction(LETTER.DELETE, (id) => {
     return { payload: { id } }
 });
 
+const logOut = createAction(AUTH.LOGOUT)
+
 export {
     sortLetters,
     setLetters,
@@ -38,4 +42,5 @@ export {
     postLetterOnServer,
     patchLetterOnServer,
     deleteLetterOnServer,
+    logOut
 };

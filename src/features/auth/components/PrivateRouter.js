@@ -5,7 +5,7 @@ import { userSelector } from '../selectors';
 
 function PrivateRoute(props) {
     const user = useSelector(userSelector);
-    return user ? props.children : <Navigate to='/' />
+    return user ? props.children : <Navigate to='/login' />
 }
 
 export {

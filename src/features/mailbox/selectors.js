@@ -8,8 +8,9 @@ const selectLetterById = lettersSelectors.selectById;
 
 const selectStatus = state => state.letters.status;
 
-const selectLettersByBox = (state, box) => lettersSelectors.selectAll(state)
+const selectLettersByBox = (state, box, sender) => lettersSelectors.selectAll(state)
     .filter(letter => letter.box === box)
+    .filter(letter => letter.sender.match(sender))
     .sort(sortFunc.bind(null, state.letters.sortBy));
 
 export {

@@ -8,7 +8,7 @@ function LetterPage() {
 
     const navigate = useNavigate();
     const params = useParams();
-    const id = Number(params.id);
+    const id = String(params.id);
     const selectedBox = localStorage.selectedBox ?? 'inBox';
     const dispatch = useDispatch();
     const letter = useSelector((state) => selectLetterById(state, id));
@@ -16,7 +16,7 @@ function LetterPage() {
     const [addRequestStatus, setAddRequestStatus] = React.useState('idle');
 
     const closeButtonHandler = () => {
-        if (addRequestStatus === 'idle') {
+        if (letter.status === 'unread' && addRequestStatus === 'idle') {
             try {
                 setAddRequestStatus('pending')
                 dispatch(patchLetterOnServer(id, 'status', 'read'))
@@ -24,9 +24,10 @@ function LetterPage() {
                 console.error('Failed to update the letter: ', err)
             } finally {
                 setAddRequestStatus('idle')
-                navigate(`/mailbox/${selectedBox}`);
+
             }
         }
+        navigate(`/mailbox/${selectedBox}`);
     }
 
     const deleteLetterFromDelBox = () => {
@@ -67,7 +68,7 @@ function LetterPage() {
         <div className='letter-page'>
             <p className="letter__from">От:{` ${letter.sender}`}</p>
             <p className="letter__date">{letter.date}</p>
-            <p className="letter__theme">Тема:{` ${letter.theme}`}</p>
+            <p className="letter__theme">Тема:{` ${letter.subject}`}</p>
             <p className="letter__message__full">{letter.message}</p>
             <button className="letter-page__close" onClick={closeButtonHandler}>Закрыть</button>
             <button className="letter-page__delete" onClick={deleteButtonHandler}>Удалить</button>

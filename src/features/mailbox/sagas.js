@@ -1,8 +1,8 @@
-import { all, call, takeEvery, put } from "redux-saga/effects";
+import { call, takeLatest, put } from "redux-saga/effects";
 import { LETTER } from "./types";
 import { setStatus, setLetters, addLetter, updateLetter, removeLetter } from "./actions";
 
-const url = process.env.REACT_APP_API_URI;
+const url = `${process.env.REACT_APP_API_URI}/mailbox`;
 
 const getLetters = async () => {
     const response = await fetch(url);
@@ -84,29 +84,11 @@ function* fetchDeleteLetter(action) {
     }
 }
 
-function* watchGetLetters() {
-    yield takeEvery(LETTER.GET, fetchGetLetters);
-}
-
-function* watchPostLetters() {
-    yield takeEvery(LETTER.POST, fetchPostLetter);
-}
-
-function* watchPatchLetters() {
-    yield takeEvery(LETTER.PATCH, fetchPatchLetter);
-}
-
-function* watchDeleteLetters() {
-    yield takeEvery(LETTER.DELETE, fetchDeleteLetter);
-}
-
 function* mailBoxSaga() {
-    yield all([
-        watchGetLetters(),
-        watchPostLetters(),
-        watchPatchLetters(),
-        watchDeleteLetters(),
-    ])
+    yield takeLatest(LETTER.GET, fetchGetLetters);
+    yield takeLatest(LETTER.POST, fetchPostLetter);
+    yield takeLatest(LETTER.PATCH, fetchPatchLetter);
+    yield takeLatest(LETTER.DELETE, fetchDeleteLetter);
 }
 
 export default mailBoxSaga;

@@ -4,13 +4,20 @@ import { useParams } from "react-router-dom";
 import { useSelector } from 'react-redux'
 import { Link } from "react-router-dom";
 import { selectLettersByBox } from "../selectors"
+import { getFormValues } from "redux-form";
 
 function LetterList() {
 
     const params = useParams();
     const box = params.Box;
 
-    const letters = useSelector(state => selectLettersByBox(state, box));
+    let sender;
+    let findSenderFormValues = useSelector(getFormValues('findSenderForm'));
+    if (findSenderFormValues) {
+        sender = findSenderFormValues.sender;
+    }
+
+    const letters = useSelector(state => selectLettersByBox(state, box, sender));
 
     let renderedLetters;
 

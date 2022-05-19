@@ -1,40 +1,47 @@
-import { call, fork, put, takeLatest } from 'redux-saga/effects';
+import { call, put, takeLatest } from 'redux-saga/effects';
 import { setUser, setLoginHint } from './actions';
 import { AUTH } from './types';
 
 const url = `${process.env.REACT_APP_API_URI}/login`;
 
-const login = async data => {
+const fetchLogin = async data => {
     const response = await fetch(url, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        mode: 'cors',
         body: JSON.stringify(data)
     })
-    return response.json();
-}
-
-function* fetchLogin(action) {
-    try {
-        const response = yield call(login, action.payload);
-        if (response.user) {
-            yield put(setUser(response.user))
-        } else {
-            yield put(setLoginHint('Неверный логин или пароль'))
-        }
-    } catch (e) {
-        console.log(e)
+    if (response.status === 200) {
+        return response.json()
+    } else {
+        throw new Error('Unauthorized');
     }
 }
 
-function* watchLogin() {
-    yield takeLatest(AUTH.LOGIN, fetchLogin)
+function* logOut() {
+    yield localStorage.clear()
+    yield put(setLoginHint(''));
+    yield put(setUser(null));
+}
+
+function* logIn(action) {
+    try {
+        let user = localStorage.getItem('login');
+        if (!user) {
+            const response = yield call(fetchLogin, action.payload);
+            user = response.user;
+        }
+        yield put(setUser(user));
+    } catch (error) {
+        console.error(error);
+        yield put(setLoginHint('Неверный логин или пароль'));
+    }
 }
 
 function* authSaga() {
-    yield fork(watchLogin);
+    yield takeLatest(AUTH.LOGIN, logIn)
+    yield takeLatest(AUTH.LOGOUT, logOut)
 }
 
 export default authSaga;

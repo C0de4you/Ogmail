@@ -163,7 +163,7 @@
   box-sizing: border-box;
 }
 
-.letter__theme {
+.letter__subject {
   clear: both;
   font-size: 18px;
   box-sizing: border-box;
@@ -355,6 +355,10 @@
   text-align: center;
 }
 
+.form__error {
+  color: red;
+}
+
 .login-form__input {
   padding: 5px;
   font-size: 16px;
@@ -395,4 +399,20 @@
 .emptyMailBox__text {
   text-align:center;
   font-size: 30px;
+}
+
+.findSenderForm {
+  float: right;
+  margin-right: 20px;
+  margin-top: 10px;
+}
+
+.findSenderForm__input {
+  height: 28.4px;
+  outline: none;
+  border: none;
+  padding: 5px;
+  box-sizing: border-box;
+  background-color: lightskyblue;
+  color: black;
 }

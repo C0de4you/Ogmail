@@ -9,6 +9,7 @@ import NewLetterButton from "./NewLetterButton";
 import SortLettersSelector from "./SortLettersSelector";
 import { getLettersFromServer } from "../actions";
 import { selectStatus } from "../selectors";
+import FindSenderReduxField from "./FindSenderField";
 
 function MailBoxPage() {
 
@@ -39,6 +40,7 @@ function MailBoxPage() {
                 <LogOutButton />
                 <NewLetterButton />
                 <SortLettersSelector />
+                <FindSenderReduxField />
             </div>
 
             <div className="mailbox__container mainTheme">
