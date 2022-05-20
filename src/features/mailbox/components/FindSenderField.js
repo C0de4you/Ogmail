@@ -17,6 +17,6 @@ function FindSenderField(props) {
     )
 }
 
-const FindSenderReduxField = reduxForm({ form: 'findSenderForm' })(FindSenderField);
+const FindSenderReduxField = reduxForm({ form: 'findSenderForm', initialValues: { sender: '' } })(FindSenderField);
 
 export default FindSenderReduxField;
